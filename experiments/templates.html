@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+<template id="my-template">
+  <div>
+    <h1>Web Components - template 1</h1>
+    <img src="http://webcomponents.org/img/logo.svg">
+  </div>
+</template>
+
+<script>
+  var template = document.querySelector('#my-template');
+  //call importnode and .content
+  // true means its deep copy
+  var clone = document.importNode(template.content, true);
+
+  document.body.appendChild(clone);
+  //var host = document.querySelector('#host');
+  //host.appendChild(clone);
+</script>
+
+<h3>another content</h3>
+
+<template id="my-template-2">
+  <div style="border 1px solid red">
+  	<style>.temp{color:red;}</style>
+    <h1 class="temp">Web Components - template 2</h1>
+    <img src="http://webcomponents.org/img/logo.svg">
+    <content is="h3"></content>
+  </div>
+</template>
+
+<script>
+  var template2 = document.querySelector('#my-template-2');
+  //call importnode and .content
+  // true means its deep copy
+  var clone2 = document.importNode(template2.content, true);
+
+  /*
+  template.content gives doc fragment with real dom inside
+  */
+
+  document.body.appendChild(clone2);
+  //var host = document.querySelector('#host');
+  //host.appendChild(clone);
+</script>
+
+</body>
+</html>

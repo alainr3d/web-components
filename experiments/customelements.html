@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <script>
+    (function(){
+        //create object out of HTMLelement prototype
+        var elproto = Object.create(HTMLElement.prototype);
+
+        elproto.say = function(){
+            alert('say something');
+        }
+
+        elproto.createdCallback = function(){
+            console.log('has been created');
+        }
+
+        elproto.attachedCallback = function(){
+            console.log('has been attached to document');
+        }
+
+        elproto.detachedCallback = function(){
+            console.log('has been removed from document');
+        }
+
+        document.registerElement('my-el', {prototype : elproto});
+
+    })();
+
+    </script>
+</head>
+<body>
+
+    <my-el></my-el>
+    
+</body>
+</html>
