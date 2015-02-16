@@ -32,10 +32,33 @@
     })();
 
     </script>
+
+
+    <script>
+
+    var NewEl = document.registerElement('another-el',{
+        prototype : Object.create(HTMLElement.prototype,{
+            prop1 : {value: 'val1'},
+            createdCallback : {value: function(){
+                console.log('wow new el');
+            }}
+
+        })
+    });
+
+    </script>
+    <style type="text/css">
+
+    my-el {
+     color: green;
+    }
+        
+    </style>
+
 </head>
 <body>
 
-    <my-el></my-el>
+    <my-el>new my-el element</my-el>
     
 </body>
 </html>

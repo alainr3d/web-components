@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	
+	<template class="power-template">
+		<style>
+		:host {
+			border: 1px solid green;
+			width:auto;
+			display: block;
+			margin:10px auto;
+			font-family: sans-serif;
+		};
+		</style>
+		<h1>super element <content select=".first"></content></h1>
+		<h2>duper <content select=".second"></content></h2>
+		<h3>crazy <content select=".third"></content></h3>
+	</template>
+	<script>
+	(function(){
+
+		var PowerEl = document.registerElement('power-el', {
+			prototype: Object.create(HTMLElement.prototype, {
+
+				createdCallback: {value: function(){
+
+					console.log('power element created!');
+
+					//clone contents from template
+					var templateContentClone = document.importNode(document.querySelector('.power-template').content,true);
+
+					//append templates in the clone
+					this.createShadowRoot().appendChild(templateContentClone);
+					
+
+				}}
+
+			})
+		})
+
+	})();
+	</script>
+
+</head>
+<body>
+
+<power-el></power-el>
+
+<power-el>
+	<span class="first"> with data</span>
+	<span class="second"> yep</span>
+	<span class="third"> awesome</span>
+</power-el>
+
+	
+</body>
+</html>

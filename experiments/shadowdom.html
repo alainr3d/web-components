@@ -6,14 +6,104 @@
 	<title>Title</title>
 </head>
 <body>
-	
   <div class="newdomhost"></div>
 
   <script>
   var domHost = document.querySelector('.newdomhost');
   //ordinary host
   var domRoot = domHost.createShadowRoot();
+
+  var newEl = document.createElement('p');
+  newEl.innerHTML = 'this is inside root';
+
+  var newElTitle = document.createElement('h2');
+  newElTitle.innerHTML = 'this shadow title';
+
+  domRoot.appendChild(newElTitle);
+  domRoot.appendChild(newEl);
+
   </script>
+
+<!-- shadow dom encpsulate styles -->
+  <div class="shadowStyles">
+  </div>
+
+  <template class="newShadowTemplate">
+    <style>
+      h2 {color: blue;}
+      :host {border: 1px solid red;};
+    </style>
+  </template>
+
+  <script>
+  (function(){ 
+
+  var domHost = document.querySelector('.shadowStyles');
+  //ordinary host
+  var domRoot = domHost.createShadowRoot();
+
+  var newEl = document.createElement('p');
+  newEl.innerHTML = 'host has also been styled from inside using :host {} selector style';
+
+  var newElTitle = document.createElement('h2');
+  newElTitle.innerHTML = 'this shadow dom blue style doesnt leak out to other h2s';
+
+  var templateContentClone = document.importNode(document.querySelector('.newShadowTemplate').content, true);
+
+  domRoot.appendChild(newElTitle);
+  domRoot.appendChild(newEl);
+  domRoot.appendChild(templateContentClone);
+
+  })();
+
+  </script>
+
+  <!-- shadow dom encpsulate styles -->
+  <div class="projectedContentHost">
+    <span>Nice value</span>
+  </div>
+
+  <template class="contentTemplate">
+    <h2>This is a sample projected  content and comes from input</h2>
+    <content select="span"></content>
+    <p> - is a value between me and title</p>
+  </template>
+
+  <script>
+  (function(){ 
+
+  var domHost = document.querySelector('.projectedContentHost');
+  //ordinary host
+  var domRoot = domHost.createShadowRoot();
+
+  var templateContentClone = document.importNode(document.querySelector('.contentTemplate').content, true);
+
+  domRoot.appendChild(templateContentClone);
+
+  })();
+
+  </script>
+
+  <!-- 
+  <div id="atcq-root"></div>
+
+  <template id="atcq">
+     <p class="response"></p>
+     <script type="text/javascript">
+       (function () {
+
+         var p = confirm('You on point Tip?');
+         var responeEl = document.querySelector('#atcq-root').shadowRoot.querySelector('.response');
+
+        if (p) {
+         responeEl.innerHTML = 'All the time Phife';
+         } else {
+         responeEl.innerHTML = 'Check the rhyme y\'all';
+         }
+       })();
+     </script>
+   </template>
+  -->
 
 </body>
 </html>
